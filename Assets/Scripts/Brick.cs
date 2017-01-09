@@ -2,15 +2,19 @@
 using System.Collections;
 
 public class Brick : MonoBehaviour {
-
-	private int maxHits;
-	private int timesHit;
+	
 	public Sprite[] hitSprites;
 	public static int brickNumber;
+	public AudioClip crack;
+	
+	private int maxHits;
+	private int timesHit;
 	private LevelManager levelmanager;
 	private bool isBreakable;
+	
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		isBreakable =(this.tag == "Breakable");
 		if(isBreakable)
 		{
@@ -25,7 +29,9 @@ public class Brick : MonoBehaviour {
 
 	}
 	
-	void OnCollisionEnter2D(Collision2D col){
+	void OnCollisionEnter2D(Collision2D col)
+	{	
+		AudioSource.PlayClipAtPoint (crack, transform.position);
 		if(isBreakable)
 		{
 			HandleHits();

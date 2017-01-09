@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour {
 	
 	public void LoadNextLevel()
 	{
-	Application.LoadLevel(Application.loadedLevel + 1);
+		Application.LoadLevel(Application.loadedLevel + 1);
 	}
 	
 	public void BrickDestroyed()
