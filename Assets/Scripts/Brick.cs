@@ -6,7 +6,8 @@ public class Brick : MonoBehaviour {
 	public Sprite[] hitSprites;
 	public static int brickNumber;
 	public AudioClip crack;
-	
+	public GameObject smoke;
+		
 	private int maxHits;
 	private int timesHit;
 	private LevelManager levelmanager;
@@ -48,6 +49,7 @@ public class Brick : MonoBehaviour {
 			brickNumber--;
 			levelmanager.BrickDestroyed();
 			Destroy(gameObject);
+			PuffSmoke();
 		}
 		else
 		{
@@ -63,7 +65,7 @@ public class Brick : MonoBehaviour {
 			this.GetComponent<SpriteRenderer>().sprite = hitSprites[spriteIndex];
 		}
 		else{
-		Debug.LogError("Brick sprite missing")
+		Debug.LogError("Brick sprite missing");
 		}
 	}
 	//TODO remove this method once we can win
@@ -71,6 +73,11 @@ public class Brick : MonoBehaviour {
 	void simulateWin()
 	{
 		levelmanager.LoadNextLevel();
+	}
+	
+	void PuffSmoke () {
+		GameObject smokePuff = Instantiate (smoke, transform.position, Quaternion.identity) as GameObject;
+		smokePuff.particleSystem.startColor = gameObject.GetComponent<SpriteRenderer>().color;
 	}
 	
 }
